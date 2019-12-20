@@ -34,7 +34,10 @@
 						<img src="./images/list-nhaxe/xe-anh-phung.jpg"> 
 						<div class="chi-tiet-nha-xe">
 							<h3>NHÀ XE <?php echo strtoupper($tour['name']) ?></h3>
-							<p><strong>Add:</strong> k18 điện biên phủ . Huyện Eah'leo <br/> <strong>Tell:</strong> 03 888 888</p>
+							<p>
+								<strong>Địa chỉ:</strong> <?php echo $tour['start_at'] ?><br/>
+								<strong>Số điện thoại:</strong> 03 888 888
+							</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>
