@@ -5,13 +5,14 @@
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
-
+    
     if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['phone'])) {
         $result = $db->table('customers')->insert([
             'name' => $_POST['name'],
             'address' => $_POST['address'],
             'email' => $_POST['email'],
-            'phone' => $_POST['phone']
+            'phone' => $_POST['phone'],
+            'tour_id' => $_POST['tour_id']
         ]);
         if ($result) {
             echo '<script>alert("Đặt Tour thành công."); location.href="index.php";</script>';

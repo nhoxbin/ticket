@@ -1,9 +1,19 @@
+<?php
+  if (isset($_POST['_method']) && $_POST['_method'] == 'delete') {
+    $result = $db->table('tour')->delete('id', $_POST['tour_id']);
+    if ($result) {
+      echo '<script>alert("Xóa tour thành công.")</script>';
+    } else {
+      echo '<script>alert("Không xóa được!")</script>';
+    }
+  }
+?>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
       Tour
-      <small>Control panel</small>
+      <!-- <small>Control panel</small> -->
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -33,6 +43,7 @@
                     <td>Điểm đến</td>
                     <td>Giá</td>
                     <td>Số chỗ ngồi</td>
+                    <td>Hành động</td>
                   </tr>
                 </thead>
                 <tbody>
@@ -48,6 +59,16 @@
                     <td><?php echo $tour['end_at'] ?></td>
                     <td><?php echo number_format($tour['price']) ?>đ</td>
                     <td><?php echo $tour['seat'] ?></td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="index.php?page=tour&method=edit&id=<?php echo $tour['id'] ?>" class="btn btn-info"><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger" onclick="document.getElementById('delete-tour-form').submit()"><i class="fa fa-close"></i></button>
+                      </div>
+                      <form action="" id="delete-tour-form" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="tour_id" value="<?php echo $tour['id'] ?>">
+                      </form>
+                    </td>
                   </tr>
                 <?php } ?>
                 </tbody>

@@ -66,6 +66,7 @@
 				</div>
 				<div class="well well-sm">
 					<form id="customer-form" method="post">
+						<input type="hidden" name="tour_id" value="<?php echo $_GET['id'] ?>">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">

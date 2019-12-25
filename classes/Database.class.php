@@ -61,6 +61,28 @@
 			return $this->statement->affected_rows;
 		}
 
+		public function with($table, $column, $id) {
+			$sql = "SELECT * FROM $this->__table INNER JOIN `$table` ON `$this->__table`.`tour_id`=`$table`.`$column`";
+			$this->__result_query = $this->query($sql);
+			$list = array();
+			if (mysqli_num_rows($this->__result_query) > 0) {
+				while ($row = mysqli_fetch_assoc($this->__result_query)) {
+					$list[] = $row;
+				}
+				mysqli_free_result($this->__result_query);
+			}
+			return $list;
+		}
+
+		public function delete($row, $id) {
+			$sql = "DELETE FROM $this->__table WHERE $row=$id";
+			$this->__result_query = $this->query($sql);
+			if ($this->__result_query) {
+				return true;
+			}
+			return false;
+		}
+
 		// Hàm đếm số hàng
 	    public function num_rows($sql = null) {
             $query = $this->query($sql);
