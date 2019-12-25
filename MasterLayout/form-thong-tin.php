@@ -4,7 +4,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="thong-tin-chuyen-di">
-					<p class="dia-diem"><i style="padding-right: 10px;" class="fa fa-bus	" aria-hidden="true"></i> HÀ NỘI <i style="padding: 0 10px;" class="fa fa-angle-right" aria-hidden="true"></i> HỒ CHÍ MINH </p>
+					<p class="dia-diem"><i style="padding-right: 10px;" class="fa fa-bus	" aria-hidden="true"></i> <?php echo $tour['start_at'] ?> <i style="padding: 0 10px;" class="fa fa-angle-right" aria-hidden="true"></i> <?php echo $tour['end_at'] ?> </p>
 					<p class="thong-tin-nha-xe">
 						<a href="#" data-toggle="modal" data-target="#exampleModalCenter">Thông tin nhà xe</a>
 						<!-- Modal -->
@@ -28,7 +28,7 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class="thong-tin-da-chon"> 
-					<div class="date">Thứ sáu, 16 tháng 12 năm 2019</div>
+					<div class="date">Khởi hành ngày: <?php echo date('d/m/Y', strtotime(explode(' - ', $tour['time'])[0])) ?></div>
 					<div class="clearfix"></div>
 					<div class="ten-nha-xe">
 						<img src="./images/list-nhaxe/xe-anh-phung.jpg"> 
@@ -42,18 +42,17 @@
 					</div>
 					<div class="clearfix"></div>
 					<div class="gio-xuat-phat">
+						<?php
+							$time = explode(' - ', $tour['time']);
+						?>
 						<div class="gio-di">
-							<h4>18 : 30</h4>
+							<h4><?php echo explode(' ', $time[0])[1] ?></h4>
 							<p><?php echo $tour['start_at'] ?></p>		
 						</div>
 						<div style="float: left;line-height: 50px;text-align: center;"><i class="fa fa-arrow-right" aria-hidden="true"></i></div>
 						<div class="gio-den">
-							<h4>03 : 30</h4>
+							<h4><?php echo explode(' ', explode(' - ', $tour['time'])[1])[1] ?></h4>
 							<p><?php echo $tour['end_at'] ?></p>		
-						</div>
-						<div class="tong-gio">
-							<h4>10h</h4>
-							<p><i style="color: #1ba0e2" class="fa fa-clock-o" aria-hidden="true"></i> Tổng giờ đi</p>
 						</div>
 					</div>
 				</div>
@@ -66,7 +65,7 @@
 					</p>
 				</div>
 				<div class="well well-sm">
-					<form>
+					<form id="customer-form" method="post">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
@@ -75,7 +74,7 @@
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span>
 									</span>
-									<input type="text" class="form-control" id="name" placeholder="Enter your name" required="required" /></div>
+									<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required="required" /></div>
 								</div>
 								<div class="form-group">
 									<label for="address">
@@ -83,7 +82,7 @@
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i>
 									</span>
-									<input type="text" class="form-control" id="address" placeholder="Enter your address" required="required" /></div>
+									<input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required="required" /></div>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -93,7 +92,7 @@
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
 									</span>
-									<input type="email" class="form-control" id="email" placeholder="Enter your email" required="required" /></div>
+									<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required="required" /></div>
 								</div>
 								<div class="form-group">
 									<label for="subject">
@@ -101,7 +100,7 @@
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span>
 									</span>
-									<input type="phone" class="form-control" id="phone" placeholder="Enter your phone no." required="required" /></div>
+									<input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter your phone no." required="required" /></div>
 								</div>
 							</div>
 
@@ -122,8 +121,7 @@
 					<p><b>Tổng tiền:</b> <span><?php echo number_format($tour['price']) ?> đ</span></p>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-warning pull-right">Tiếp Tục</button>
-
+					<button type="submit" class="btn btn-warning pull-right" onclick="document.getElementById('customer-form').submit()">Tiếp Tục</button>
 				</div>
 			</div>
 		</div>

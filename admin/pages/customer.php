@@ -27,27 +27,29 @@
                 <thead>
                   <tr>
                     <td>STT</td>
-                    <td>Tên nhà xe</td>
-                    <td>Thời gian</td>
-                    <td>Điểm đi</td>
-                    <td>Điểm đến</td>
-                    <td>Giá</td>
-                    <td>Số chỗ ngồi</td>
+                    <td>Tên khách hàng</td>
+                    <td>Địa chỉ</td>
+                    <td>Email</td>
+                    <td>Số điện thoại</td>
+                    <td>Hành động</td>
                   </tr>
                 </thead>
                 <tbody>
                 <?php
-                  $tours = $db->table('tour')->get();
-                  foreach ($tours as $key => $tour) {
+                  $customers = $db->table('customers')->get();
+                  foreach ($customers as $key => $customer) {
                 ?>
                   <tr>
                     <td><?php echo $key+1 ?></td>
-                    <td><?php echo $tour['name'] ?></td>
-                    <td><?php echo $tour['time'] ?></td>
-                    <td><?php echo $tour['start_at'] ?></td>
-                    <td><?php echo $tour['end_at'] ?></td>
-                    <td><?php echo number_format($tour['price']) ?>đ</td>
-                    <td><?php echo $tour['seat'] ?></td>
+                    <td><?php echo $customer['name'] ?></td>
+                    <td><?php echo $customer['address'] ?></td>
+                    <td><?php echo $customer['email'] ?></td>
+                    <td><?php echo $customer['phone'] ?></td>
+                    <td>
+                      <div class="btn-group">
+                        
+                      </div>
+                    </td>
                   </tr>
                 <?php } ?>
                 </tbody>

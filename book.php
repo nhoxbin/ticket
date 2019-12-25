@@ -5,11 +5,21 @@
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
+
+    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['phone'])) {
+        $result = $db->table('customers')->insert([
+            'name' => $_POST['name'],
+            'address' => $_POST['address'],
+            'email' => $_POST['email'],
+            'phone' => $_POST['phone']
+        ]);
+        if ($result) {
+            echo '<script>alert("Đặt Tour thành công."); location.href="index.php";</script>';
+        } else {
+            echo '<script>alert("Có lỗi xảy ra!"); location.reload();</script>';
+        }
+    }
     $tour = $db->table('tour')->find($_GET['id']);
-    /*echo '<pre>';
-    print_r($tour);
-    echo '</pre>';
-    die;*/
 ?>
 <!doctype html>
 <html>
@@ -32,6 +42,7 @@
     ?>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link href="css/style-form-thong-tin-dat-xe.css" rel="stylesheet" type="text/css" />
+    <link href="css/book.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
