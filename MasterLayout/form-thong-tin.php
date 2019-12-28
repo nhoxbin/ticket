@@ -66,6 +66,7 @@
 				</div>
 				<div class="well well-sm">
 					<form id="customer-form" method="post">
+						<input type="hidden" name="form-check" value="<?php echo $_SESSION['form-check'] ?>">
 						<input type="hidden" name="tour_id" value="<?php echo $_GET['id'] ?>">
 						<div class="row">
 							<div class="col-md-6">
@@ -122,7 +123,7 @@
 					<p><b>Tổng tiền:</b> <span><?php echo number_format($tour['price']) ?> đ</span></p>
 				</div>
 				<div class="form-group">
-					<button type="submit" class="btn btn-warning pull-right" onclick="document.getElementById('customer-form').submit()">Tiếp Tục</button>
+					<button type="submit" class="btn btn-warning pull-right" onclick="document.getElementById('customer-form').submit()">Đặt vé</button>
 				</div>
 			</div>
 		</div>

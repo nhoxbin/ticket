@@ -1,7 +1,12 @@
 <?php
-  if (isset($_POST['_method']) && $_POST['_method'] == 'delete') {
-    $result = $db->table('customers')->delete('id', $_POST['customer_id']);
+  if (isset($_POST['_method']) && $_POST['_method'] == 'delete' && $_SESSION['form-check'] === $_POST['form-check']) {
+    $result = $db->table('customers')->where('id', $_POST['customer_id'])->delete();
     if ($result) {
+      $_SESSION['form-check'] = microtime();
+      $seat = $db->table('tours')->find($_POST['tour_id'])['seat'];
+      $db->table('tours')->where('id', $_POST['tour_id'])->update([
+          'seat' => $seat+1
+      ]);
       echo '<script>alert("Xóa khách hàng thành công.")</script>';
     } else {
       echo '<script>alert("Không xóa được!")</script>';
@@ -47,7 +52,7 @@
                 </thead>
                 <tbody>
                 <?php
-                  $customers = $db->table('customers')->with('tour', 'id', 'tour_id');
+                  $customers = $db->table('customers')->with('tours');
                   foreach ($customers as $key => $customer) {
                 ?>
                   <tr>
@@ -62,6 +67,8 @@
                       <button class="btn btn-danger" onclick="document.getElementById('delete-customer-form').submit()"><i class="fa fa-close"></i></button>
                       <form action="" method="post" id="delete-customer-form" style="display: none;">
                         <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="form-check" value="<?php echo $_SESSION['form-check'] ?>">
+                        <input type="hidden" name="tour_id" value="<?php echo $customer['tour_id'] ?>">
                         <input type="hidden" name="customer_id" value="<?php echo $customer['id'] ?>">
                       </form>
                     </td>

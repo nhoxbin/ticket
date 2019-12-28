@@ -2,7 +2,7 @@
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
-    $tours = $db->table('tour')->get();
+    $tours = $db->table('tours')->get();
 ?>
 <!DOCTYPE html>
 <html>

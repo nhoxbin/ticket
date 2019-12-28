@@ -1,6 +1,6 @@
 <?php
   if (isset($_POST['name'])) {
-    $db->table('tour')->insert([
+    $result = $db->table('tours')->create([
       'name' => $_POST['name'],
       'time' => $_POST['time'],
       'start_at' => $_POST['start_at'],
@@ -8,6 +8,9 @@
       'price' => $_POST['price'],
       'seat' => $_POST['seat']
     ]);
+    if ($result) {
+      header('Location: index.php?page=tour');
+    }
   }
 ?>
 

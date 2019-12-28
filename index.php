@@ -17,6 +17,10 @@
     }
     $less = new lessc;
     $less->compileFile('less/stylemain.less', 'css/style.css');
+    
+    if (!isset($_SESSION['form-check'])) {
+        $_SESSION['form-check'] = microtime();
+      }
     ?>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 </head>

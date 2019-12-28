@@ -5,6 +5,10 @@
   if ($_SESSION['username'] !== $user['username'] && $_SESSION['password'] !== $user['password']) {
     header('Location: session/login.php');
   }
+  if (!isset($_SESSION['form-check'])) {
+    $_SESSION['form-check'] = microtime();
+  }
+  
   require '../classes/Database.class.php';
   $config = include('../core/config.php');
   $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);

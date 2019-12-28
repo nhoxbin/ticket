@@ -1,7 +1,9 @@
 <?php
-  if (isset($_POST['_method']) && $_POST['_method'] == 'delete') {
-    $result = $db->table('tour')->delete('id', $_POST['tour_id']);
+  if (isset($_POST['_method']) && $_POST['_method'] == 'delete' && $_SESSION['form-check'] === $_POST['form-check']) {
+
+    $result = $db->table('tours')->where('id', $_POST['tour_id'])->delete();
     if ($result) {
+      $_SESSION['form-check'] = microtime();
       echo '<script>alert("Xóa tour thành công.")</script>';
     } else {
       echo '<script>alert("Không xóa được!")</script>';
@@ -48,7 +50,7 @@
                 </thead>
                 <tbody>
                 <?php
-                  $tours = $db->table('tour')->get();
+                  $tours = $db->table('tours')->get();
                   foreach ($tours as $key => $tour) {
                 ?>
                   <tr>
@@ -66,6 +68,7 @@
                       </div>
                       <form action="" id="delete-tour-form" method="post">
                         <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="form-check" value="<?php echo $_SESSION['form-check'] ?>">
                         <input type="hidden" name="tour_id" value="<?php echo $tour['id'] ?>">
                       </form>
                     </td>

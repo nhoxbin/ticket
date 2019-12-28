@@ -5,9 +5,9 @@
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
-    
+
     if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['phone'])) {
-        $result = $db->table('customers')->insert([
+        $result = $db->table('customers')->create([
             'name' => $_POST['name'],
             'address' => $_POST['address'],
             'email' => $_POST['email'],
@@ -15,12 +15,17 @@
             'tour_id' => $_POST['tour_id']
         ]);
         if ($result) {
-            echo '<script>alert("Đặt Tour thành công."); location.href="index.php";</script>';
+            $_SESSION['form-check'] = microtime();
+            $seat = $db->table('tours')->find($_GET['id'])['seat'];
+            $db->table('tours')->where('id', $_GET['id'])->update([
+                'seat' => $seat-1
+            ]);
+            echo '<script>alert("Đặt Tour thành công."); location.href="list.php";</script>';
         } else {
             echo '<script>alert("Có lỗi xảy ra!"); location.reload();</script>';
         }
     }
-    $tour = $db->table('tour')->find($_GET['id']);
+    $tour = $db->table('tours')->find($_GET['id']);
 ?>
 <!doctype html>
 <html>
