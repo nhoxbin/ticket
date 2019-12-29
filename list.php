@@ -1,7 +1,13 @@
 <?php
+    session_start();
+    
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
+    if (isset($_GET['t']) && $_GET['t'] === $_SESSION['form-check']) {
+        $_SESSION['form-check'] = microtime();
+        echo '<script>alert("Không có chuyến đi hoặc chuyến đi này đã hết chỗ! Vui lòng chọn chuyến khác.")</script>';
+    }
     $tours = $db->table('tours')->get();
 ?>
 <!DOCTYPE html>

@@ -1,10 +1,18 @@
 <?php
-    if (!isset($_GET['id'])) {
-        header('location: index.php');
-    }
+    session_start();
+
     require 'classes/Database.class.php';
     $config = include('core/config.php');
     $db = new Database($config['db']['host'], $config['db']['username'], $config['db']['password'], $config['db']['db_name']);
+
+    if (!isset($_GET['id'])) {
+        header('location: index.php');
+    } else {
+        $tour = $db->table('tours')->find($_GET['id']);
+        if (empty($tour) || $tour['seat'] === 0) {
+            header('location: list.php?t='.$_SESSION['form-check']);
+        }
+    }
 
     if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['phone'])) {
         $result = $db->table('customers')->create([
@@ -16,7 +24,7 @@
         ]);
         if ($result) {
             $_SESSION['form-check'] = microtime();
-            $seat = $db->table('tours')->find($_GET['id'])['seat'];
+            $seat = $tour['seat'];
             $db->table('tours')->where('id', $_GET['id'])->update([
                 'seat' => $seat-1
             ]);
