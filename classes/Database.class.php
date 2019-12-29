@@ -108,12 +108,12 @@ class Database
     		die('Query not accepted!');
     	}
 
-        $sql = "SELECT * FROM $this->__table WHERE `$col` $condition $value";
+        $sql = "SELECT * FROM $this->__table WHERE `$col` $condition '$value'";
         $this->query($sql);
         if ($this->__result = mysqli_fetch_assoc($this->__query)) {
             return $this;
         } else {
-            die('WHERE condition not found!!!');
+            die('WHERE condition wrong query!!!');
         }
     }
 
