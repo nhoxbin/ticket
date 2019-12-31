@@ -3,6 +3,21 @@
   if (empty($tour)) {
     header('Location: index.php?page=tour');
   }
+
+  if (isset($_POST['_method']) && $_POST['_method'] === 'patch' && $_SESSION['form-check'] === $_POST['form-check']) {
+    $_SESSION['form-check'] = microtime();
+    $result = $db->table('tours')->where('id', $_GET['id'])->update([
+      'name' => $_POST['name'],
+      'time' => $_POST['time'],
+      'start_at' => $_POST['start_at'],
+      'end_at' => $_POST['end_at'],
+      'price' => $_POST['price'],
+      'seat' => $_POST['seat']
+    ]);
+    if ($result) {
+      echo '<script>alert("Cập nhật thành công."); location.href="index.php?page=tour"</script>';
+    }
+  }
 ?>
 
 <div class="content-wrapper">
@@ -29,6 +44,8 @@
           </div>
           <div class="box-body">
             <form action="" method="post" id="tour-form">
+              <input type="hidden" name="_method" value="patch">
+              <input type="hidden" name="form-check" value="<?php echo $_SESSION['form-check'] ?>">
               <div class="form-group row">
                 <label for="name" class="col-md-3 col-form-label">Tên nhà xe:</label>
                 <div class="col-md-9">
@@ -38,7 +55,7 @@
               <div class="form-group row">
                 <label for="name" class="col-md-3 col-form-label">Thời gian:</label>
                 <div class="col-md-9">
-                  <input type="text" name="time" class="form-control" id="reservationtime" value="<?php echo $tour['time'] ?>">
+                  <input type="text" name="time" class="form-control" id="time-edit" value="<?php echo $tour['time'] ?>">
                 </div>
               </div>
               <div class="form-group row">

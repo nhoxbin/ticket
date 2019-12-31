@@ -97,7 +97,7 @@
 						<div class="lich-trinh-di">
 							<p><?php echo $tour['start_at'] ?><i class="fa fa-angle-right" style="color: orange; padding: 0 10px" aria-hidden="true"></i><?php echo $tour['end_at'] ?></p>
 							<p><span style="color:#f0ad4e; padding-right: 10px; ">Giờ đi:</span><?php echo $tour['time'] ?></p>
-							<p><span style="color:#f0ad4e; padding-right: 10px; ">Còn:</span><?php echo $tour['seat'] . ' vé' . ($tour['seat'] ? null : 'Hết chỗ') ?></p>
+							<p><span style="color:#f0ad4e; padding-right: 10px; ">Còn:</span><?php echo $tour['seat'] . ' vé ' . ($tour['seat'] ? null : '(Hết chỗ)') ?></p>
 						</div>
 						<!-- <div class="hanh-ly dropdown"><i class="fa fa-suitcase btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenu2">

@@ -9,28 +9,36 @@
         header('location: index.php');
     } else {
         $tour = $db->table('tours')->find($_GET['id']);
-        if (empty($tour) || $tour['seat'] === 0) {
-            header('location: list.php?t='.$_SESSION['form-check']);
+        if (empty($tour) || $tour['seat'] == 0) {
+            echo '<script>alert("Chuyến đi này đã hết chỗ hoặc ko tồn tại! Vui lòng chọn chuyến khác."); location.href="list.php"</script>';
         }
     }
 
-    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['email']) && isset($_POST['phone'])) {
-        $result = $db->table('customers')->create([
-            'name' => $_POST['name'],
-            'address' => $_POST['address'],
-            'email' => $_POST['email'],
-            'phone' => $_POST['phone'],
-            'tour_id' => $_POST['tour_id']
-        ]);
-        if ($result) {
-            $_SESSION['form-check'] = microtime();
-            $seat = $tour['seat'];
-            $db->table('tours')->where('id', $_GET['id'])->update([
-                'seat' => $seat-1
+    $error;
+    if (isset($_POST['form-check']) && $_POST['form-check'] === $_SESSION['form-check']) {
+        $_SESSION['form-check'] = microtime();
+
+        if (!empty($_POST['name']) && !empty($_POST['address']) && !empty($_POST['email']) && !empty($_POST['phone'])) {
+            $error = false;
+            $result = $db->table('customers')->create([
+                'name' => $_POST['name'],
+                'address' => $_POST['address'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+                'tour_id' => $_POST['tour_id']
             ]);
-            echo '<script>alert("Đặt Tour thành công."); location.href="list.php";</script>';
+
+            if ($result) {
+                $seat = $tour['seat'];
+                $db->table('tours')->where('id', $_GET['id'])->update([
+                    'seat' => $seat-1
+                ]);
+                echo '<script>alert("Đặt Tour thành công."); location.href="list.php";</script>';
+            } else {
+                echo '<script>alert("Có lỗi xảy ra!"); location.reload();</script>';
+            }
         } else {
-            echo '<script>alert("Có lỗi xảy ra!"); location.reload();</script>';
+            $error = true;
         }
     }
     $tour = $db->table('tours')->find($_GET['id']);

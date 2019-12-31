@@ -1,8 +1,8 @@
 <?php
   if (isset($_POST['_method']) && $_POST['_method'] == 'delete' && $_SESSION['form-check'] === $_POST['form-check']) {
+    $_SESSION['form-check'] = microtime();
     $result = $db->table('customers')->where('id', $_POST['customer_id'])->delete();
     if ($result) {
-      $_SESSION['form-check'] = microtime();
       $seat = $db->table('tours')->find($_POST['tour_id'])['seat'];
       $db->table('tours')->where('id', $_POST['tour_id'])->update([
           'seat' => $seat+1
@@ -37,7 +37,7 @@
           </div>
           <div class="box-body">
             <div class="table-reponsive">
-              <table class="table table-bordered table-hover table-striped">
+              <table id="customer-table" class="table table-bordered table-hover table-striped">
                 <thead>
                   <tr>
                     <td>STT</td>

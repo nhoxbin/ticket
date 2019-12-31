@@ -36,7 +36,8 @@
   <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
   <link rel="stylesheet" href="resources/bower_components/bootstrap-daterangepicker/daterangepicker.css">
-
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../libs/DataTables/datatables.min.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -83,6 +84,8 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../libs/DataTables/datatables.min.js"></script>
 <!-- daterangepicker -->
 <script src="resources/bower_components/moment/min/moment.min.js"></script>
 <script src="resources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -98,9 +101,16 @@
 <!-- <script src="resources/dist/js/pages/dashboard.js"></script> -->
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
-
+<?php
+  $time = explode(' - ', $tour['time']);
+?>
 <script>
-  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }})
+  $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }});
+
+  $('#time-edit').daterangepicker({ startDate: '<?php echo $time[0]; ?>', endDate: '<?php echo $time[0]; ?>', timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' }});
+
+  $('#tour-table').DataTable();
+  $('#customer-table').DataTable();
 </script>
 </body>
 </html>

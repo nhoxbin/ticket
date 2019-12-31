@@ -71,38 +71,35 @@
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="name">
-									Name</label>
+									<label for="name">Họ tên</label>
 									<div class="input-group">
-										<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span>
+										<span class="input-group-addon"><span class="fa fa-user"></span>
 									</span>
-									<input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" required="required" /></div>
+									<input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ tên" value="<?php echo $_POST['name'] ?? null ?>" required="required" /></div>
 								</div>
 								<div class="form-group">
-									<label for="address">
-									Address</label>
+									<label for="address">Địa chỉ</label>
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i>
 									</span>
-									<input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required="required" /></div>
+									<input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" value="<?php echo $_POST['address'] ?? null ?>" required="required" /></div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="email">
-									Email</label>
+									<label for="email">Email</label>
 									<div class="input-group">
 										<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
 									</span>
-									<input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required="required" /></div>
+									<input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="<?php echo $_POST['email'] ?? null ?>" required="required" /></div>
 								</div>
 								<div class="form-group">
-									<label for="subject">
-									Mobile No.</label>
+									<label for="subject">Số điện thoại</label>
 									<div class="input-group">
-										<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span>
+										<span class="input-group-addon"><span class="fa fa-phone"></span>
 									</span>
-									<input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter your phone no." required="required" /></div>
+									<input type="phone" class="form-control" id="phone" name="phone" placeholder="Nhập Số điện thoại" value="<?php echo $_POST['phone'] ?? null ?>" required="required" /></div>
+									<span class="text-error">Lỗi</span>
 								</div>
 							</div>
 
