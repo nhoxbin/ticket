@@ -76,6 +76,11 @@
 										<span class="input-group-addon"><span class="fa fa-user"></span>
 									</span>
 									<input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ tên" value="<?php echo $_POST['name'] ?? null ?>" required="required" /></div>
+									<?php
+										if(empty($_POST['name'])) {
+											echo '<span class="text-error">Lỗi</span>';
+										}
+									?>
 								</div>
 								<div class="form-group">
 									<label for="address">Địa chỉ</label>
@@ -83,6 +88,11 @@
 										<span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i>
 									</span>
 									<input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ" value="<?php echo $_POST['address'] ?? null ?>" required="required" /></div>
+									<?php
+										if(empty($_POST['address'])) {
+											echo '<span class="text-error">Lỗi</span>';
+										}
+									?>
 								</div>
 							</div>
 							<div class="col-md-6">
@@ -92,6 +102,11 @@
 										<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
 									</span>
 									<input type="email" class="form-control" id="email" name="email" placeholder="Nhập Email" value="<?php echo $_POST['email'] ?? null ?>" required="required" /></div>
+									<?php
+										if(empty($_POST['email'])) {
+											echo '<span class="text-error">Lỗi</span>';
+										}
+									?>
 								</div>
 								<div class="form-group">
 									<label for="subject">Số điện thoại</label>
@@ -99,7 +114,11 @@
 										<span class="input-group-addon"><span class="fa fa-phone"></span>
 									</span>
 									<input type="phone" class="form-control" id="phone" name="phone" placeholder="Nhập Số điện thoại" value="<?php echo $_POST['phone'] ?? null ?>" required="required" /></div>
-									<span class="text-error">Lỗi</span>
+									<?php
+										if(empty($_POST['phone'])) {
+											echo '<span class="text-error">Lỗi</span>';
+										}
+									?>
 								</div>
 							</div>
 
