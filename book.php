@@ -13,7 +13,7 @@
             echo '<script>alert("Chuyến đi này đã hết chỗ hoặc ko tồn tại! Vui lòng chọn chuyến khác."); location.href="list.php"</script>';
         }
     }
-
+    
     $error;
     if (isset($_POST['form-check']) && $_POST['form-check'] === $_SESSION['form-check']) {
         $_SESSION['form-check'] = microtime();

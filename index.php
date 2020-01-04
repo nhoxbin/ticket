@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -12,6 +11,8 @@
     <script src="js/bootstrap.min.js"></script>
 
     <?php
+    session_start();
+
     if (!class_exists('lessc')) {
         include ('./libs/lessc.inc.php');
     }

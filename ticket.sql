@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 29, 2019 lúc 08:06 PM
+-- Thời gian đã tạo: Th1 04, 2020 lúc 12:20 PM
 -- Phiên bản máy phục vụ: 10.4.6-MariaDB
 -- Phiên bản PHP: 7.3.9
 
@@ -54,13 +54,6 @@ CREATE TABLE `tours` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `tours`
---
-
-INSERT INTO `tours` (`id`, `name`, `time`, `start_at`, `end_at`, `price`, `seat`) VALUES
-(6, 'bin', '12/28/2019 12:00 AM - 12/28/2019 11:59 PM', 'Sài Gòn', 'Hà Nội', '100000', 94);
-
---
 -- Chỉ mục cho các bảng đã đổ
 --
 
@@ -84,7 +77,7 @@ ALTER TABLE `tours`
 -- AUTO_INCREMENT cho bảng `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `tours`
